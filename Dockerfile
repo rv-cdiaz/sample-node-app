@@ -7,6 +7,6 @@ COPY . .
 RUN npm install --production && \
     useradd -r app
 
-USER node
+USER app
 
 CMD ["node", "index.js"]
