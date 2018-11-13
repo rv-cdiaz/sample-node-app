@@ -6,14 +6,15 @@ const dbHost = process.env.DB_HOST || 'db';
 
 async function run () {
   const app = express();
-  const connection = await mysql.createConnection({host: dbHost, user: 'root', password: 'example'});
 
   app.get('/', (req, res) => {
     res.json({message: 'Hello World!'});
   });
 
   app.get('/mysql', async (req, res) => {
+    const connection = await mysql.createConnection({host: dbHost, user: 'root', password: 'example'});
     const [rows] = await connection.execute('SELECT 2+2');
+    await connection.end();
     res.json(rows);
   });
 
